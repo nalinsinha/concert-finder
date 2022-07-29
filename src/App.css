@@ -47,3 +47,20 @@
 #artistList {
     padding: 2rem;
 }
+
+#concertList {
+    background-color:rgba(30, 0, 0, 0);
+    color: white;
+    border-left: 0;
+    border-right: 0;
+    border-color: white;
+}
+
+#backgroundHeader {
+    background-image: url("./img/concert.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    padding: 19%
+
+}

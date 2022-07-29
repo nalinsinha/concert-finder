@@ -1,23 +1,10 @@
 import "./App.css";
 import SpotifyWebAPI from "spotify-web-api-js";
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Link,
-	useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import Artist from "./components/Artist";
 
 const spotify = new SpotifyWebAPI();
-const Artist = () => {
-	const id = useParams().id;
-	return (
-		<div>
-			<h1>{id}</h1>
-		</div>
-	);
-};
 
 function App() {
 	const CLIENT_ID = "5003c8800ccb4488acf7163ac7730d1f";
@@ -52,7 +39,7 @@ function App() {
 						return { name: t.name, id: t.id };
 					});
 					console.log("a: ", names);
-					setArtists(names);
+					setArtists(a.items);
 				})
 				.then(function(data) {
 					console.log(artists);
@@ -76,10 +63,41 @@ function App() {
 	};
 
 	const renderArtists = () => {
+		console.log("ex: artist", artists[0]);
 		return artists.map((artist) => (
 			<div>
-				<Link key={artist.id} to={`/artist/${artist.id}`}>
-					{artist.name}
+				<Link
+					key={artist.id}
+					to={{
+						pathname: `/artist/${artist.id}`,
+						state: "nalin",
+					}}
+					state={artist}
+				>
+					<div className="card mb-3">
+						<div className="row no-gutters">
+							<div className="col-md-4">
+								<img
+									src={artist.images[2].url}
+									className="card-img"
+									alt="..."
+								/>
+							</div>
+							<div className="col-md-8">
+								<div className="card-body">
+									<h5 className="card-title">
+										{artist.name}
+									</h5>
+									<button
+										type="button"
+										className="btn btn-secondary btn-lg btn-block"
+									>
+										See concerts
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</Link>
 			</div>
 		));
@@ -90,25 +108,45 @@ function App() {
 
 	return (
 		<div className="App">
-            <nav className="navbar navbar-dark bg-dark">
-					<span id="title-text" className="navbar-brand mb-0 h1">Concert Finder</span>
+			<nav className="navbar navbar-dark bg-dark">
+				<span id="title-text" className="navbar-brand mb-0 h1">
+					Concert Finder
+				</span>
 			</nav>
-			<header className="App-header">
-				
 				{spotifyToken ? (
-					<Router>
-						<Routes>
-							<Route path="/artist/:id" element={<Artist />} />
-							<Route path="/" element={<ArtistList />} />
-						</Routes>
-					</Router>
+                    <header className="App-header">
+                        <Router>
+                            <Routes>
+                                <Route path="/artist/:id" element={<Artist />} />
+                                <Route path="/" element={<ArtistList />} />
+                            </Routes>
+					    </Router>
+                    </header>
+					
 				) : (
-					<div>
-						<a href={loginURL}>Sign in with Spotify</a>
-						<h2>Please Login</h2>
-					</div>
+						<div
+							className=" text-center bg-image"
+							id="backgroundHeader"
+						>
+							<div
+								className="mask"
+							>
+								<div className="d-flex justify-content-center align-items-center h-100">
+									<div className="text-black">
+										<h1 className="mb-3">Find concerts from your favorite artists</h1>
+										<a
+											className="btn btn-outline-light btn-lg btn-dark"
+											href={loginURL}
+											role="button"
+										>
+											Login
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+			
 				)}
-			</header>
 		</div>
 	);
 }
