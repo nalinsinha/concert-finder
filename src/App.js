@@ -8,7 +8,7 @@ const spotify = new SpotifyWebAPI();
 
 function App() {
 	const CLIENT_ID = "5003c8800ccb4488acf7163ac7730d1f";
-	const REDIRECT_URI = "http://localhost:3000";
+	const REDIRECT_URI = "https://find-concert.herokuapp.com/";
 	const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 	const RESPONSE_TYPE = "token";
 	const scopes = ["user-top-read", "user-follow-read"];
