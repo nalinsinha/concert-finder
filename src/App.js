@@ -135,11 +135,12 @@ function App() {
 									<div className="text-black">
 										<h1 className="mb-3">Find concerts from your favorite artists</h1>
 										<a
-											className="btn btn-outline-light btn-lg btn-dark"
+											className="btn btn-outline-light btn-lg"
+                                            id="loginButton"
 											href={loginURL}
 											role="button"
 										>
-											Login
+											Login with Spotify
 										</a>
 									</div>
 								</div>
