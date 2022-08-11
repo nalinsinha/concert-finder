@@ -9,6 +9,7 @@ const Artist = (props) => {
     const artist = location.state
     const [events, setEvents] = useState([]);
 	useEffect(() => {
+        console.log("sdfsfds", artist)
 		var artistSlug = artist.name.replace(" ", "+")
 		var url =
 			`https://api.seatgeek.com/2/events?q=${artistSlug}&client_id=MjU1Mzc4NTh8MTY1ODcxMzg0MC40NDY0OTkz`;
@@ -28,10 +29,13 @@ const Artist = (props) => {
     const renderEvents = () => {
 		return events.map((event) => (
 			<div>
-				<li id="concertList" className="list-group-item ">{event.venue.display_location}: {event.short_title} </li>
+				<li id="concertList" className="list-group-item "><a target="_blank" className="text-white" href={event.url} >{event.venue.display_location}: {event.short_title}</a> </li>
 			</div>
 		));
 	};
+
+    console.log("Events:", events)
+
 
 	return (
 		<div>
