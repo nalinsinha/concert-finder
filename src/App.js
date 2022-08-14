@@ -113,41 +113,36 @@ function App() {
 					Concert Finder
 				</span>
 			</nav>
-				{spotifyToken ? (
-                    <header className="App-header">
-                        <Router>
-                            <Routes>
-                                <Route path="/artist/:id" element={<Artist />} />
-                                <Route path="/" element={<ArtistList />} />
-                            </Routes>
-					    </Router>
-                    </header>
-					
-				) : (
-						<div
-							className=" text-center bg-image"
-							id="backgroundHeader"
-						>
-							<div
-								className="mask"
-							>
-								<div className="d-flex justify-content-center align-items-center h-100">
-									<div className="text-black">
-										<h1 className="mb-3">Find concerts from your favorite artists</h1>
-										<a
-											className="btn btn-outline-light btn-lg"
-                                            id="loginButton"
-											href={loginURL}
-											role="button"
-										>
-											Login with Spotify
-										</a>
-									</div>
-								</div>
+			{spotifyToken ? (
+				<header className="App-header">
+					<Router>
+						<Routes>
+							<Route path="/artist/:id" element={<Artist />} />
+							<Route path="/" element={<ArtistList />} />
+						</Routes>
+					</Router>
+				</header>
+			) : (
+				<div className=" text-center bg-image" id="backgroundHeader">
+					<div className="mask">
+						<div className="d-flex justify-content-center align-items-center h-100">
+							<div className="text-black">
+								<h1 className="mb-3">
+									Find concerts from your favorite artists
+								</h1>
+								<a
+									className="btn btn-outline-light btn-lg"
+									id="loginButton"
+									href={loginURL}
+									role="button"
+								>
+									Login with Spotify
+								</a>
 							</div>
 						</div>
-			
-				)}
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
